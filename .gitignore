@@ -1,0 +1,5 @@
+# Ignore target, test-output, report, and log directories
+newman/
+report.html
+*.png
+
