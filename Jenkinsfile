@@ -6,7 +6,20 @@ pipeline {
             steps {
                 script {
                     // Install Newman (if not installed) on Windows
-                    bat 'npm install -g newman'
+                    //bat 'npm install -g newman'
+                    def newmanInstalled = false
+                    try {
+                        // Check if Newman is installed by running `newman --version`
+                        bat 'newman --version'
+                        newmanInstalled = true
+                    } catch (Exception e) {
+                        echo 'Newman is not installed, installing now...'
+                    }
+
+                    // If Newman is not installed, install it
+                    if (!newmanInstalled) {
+                        bat 'npm install -g newman'
+                    }
                 }
             }
         }
