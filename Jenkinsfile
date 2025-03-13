@@ -54,5 +54,15 @@ pipeline {
         failure {
             echo 'Postman tests failed, check the report for details.'
         }
+
+      always {
+            // Publish the HTML report so it appears on the Jenkins job page
+            publishHTML(target: [
+                reportName: 'Postman Test Report',
+                reportDir: 'newman',
+                reportFiles: 'report.html',
+                keepAll: true
+            ])
+      }
     }
 }
